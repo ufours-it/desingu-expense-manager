@@ -1,50 +1,63 @@
-# Welcome to your Expo app 👋
+Personal Expense
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Pocket Ledger is a small Expo React Native application for tracking personal expenses. It demonstrates Navigation, Forms, List Rendering, and Local Data Persistence using a concise, pragmatic code structure.
 
-## Get started
+Core features
+- Dashboard: summary of income/expenses and a scrollable list of recent transactions.
+- Add Entry: form to add a transaction (Amount, Category, Date, Note, Income/Expense type).
+- Local persistence: transactions are persisted using AsyncStorage.
+- Navigation: light routing using Expo Router/React Navigation.
 
-1. Install dependencies
+Quick start
 
-   ```bash
-   npm install
-   ```
-
-2. Start the app
-
-   ```bash
-   npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+1. Install dependencies:
 
 ```bash
-npm run reset-project
+npm install
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+2. Start the app (example port 8001):
 
-## Learn more
+```bash
+npx expo start --port 8001
+```
 
-To learn more about developing your project with Expo, look at the following resources:
+Project structure (high-level)
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+- app/
+	- (tabs)/ — main tab screens (Dashboard, Add Entry, Settings)
+	- components/ — reusable UI components (MonthlyChart, CategoryPicker, etc.)
+	- providers/ — Context providers (TransactionsProvider, ThemeProvider, CurrencyProvider)
+	- hooks/ — small shared hooks (useAppStyles)
+	- (lib)/ — helpers (date parsing)
+- assets/ — images and static assets
+- components/ — small shared presentational components used across app and web
+- constants/ — categories, theme tokens, typography
 
-## Join the community
+Why these choices
 
-Join our community of developers creating universal apps.
+- Expo + TypeScript: fast iteration and cross-platform consistency with type safety.
+- Context API (TransactionsProvider): lightweight and appropriate for app-wide state (transactions, persistence). Easy to reason about and small compared to Redux.
+- AsyncStorage: simple, reliable local persistence for this scope. The provider normalizes date values on load.
+- Expo Router / React Navigation: clean, file-based routing and smooth navigation between Dashboard and Add Entry.
+- react-native-svg + custom `MonthlyChart`: small, dependency-light visualization for monthly totals.
+- @react-native-picker/picker and `react-native-modal-datetime-picker`: consistent native-like inputs across platforms.
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+Files to review
+- [app/(tabs)/index.tsx](app/(tabs)/index.tsx) — Dashboard screen and list rendering
+- [app/(tabs)/add-entry.tsx](app/(tabs)/add-entry.tsx) — Add Entry form and validation
+- [app/providers/TransactionsProvider.tsx](app/providers/TransactionsProvider.tsx) — AsyncStorage persistence + add/edit/delete APIs
+
+Deliverables / Demo
+
+- Source code: commit this repo and push to GitHub.
+- Demo: record a short screen capture showing adding transactions, viewing the dashboard, and persistence after a restart.
+
+
+
+
+
+
+
+
+
